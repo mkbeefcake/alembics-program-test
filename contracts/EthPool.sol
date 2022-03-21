@@ -35,7 +35,7 @@ contract EthPool is AccessControl {
     revokeRole(TEAM_ROLE, account);
   }
 
-  fallback() external payable {    
+  receive() external payable {    
 
     if (!status[msg.sender].hasValue)
       users.push(msg.sender);
