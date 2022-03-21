@@ -15,13 +15,16 @@ contract EthPool is AccessControl {
   address[] public users;
   mapping(address => DepositStatus) public status;
 
-  constructor() {
-    _setupRole(TEAM_ROLE, msg.sender);
-  }
-
   modifier onlyTeam() {
     require(hasRole(TEAM_ROLE, msg.sender), "No team members");
     _;
+  }
+
+  event Deposit(address indexed account, uint value);
+  event Withdraw(address indexed account, uint value);
+
+  constructor() {
+    _setupRole(TEAM_ROLE, msg.sender);
   }
 
   function addTeam(address account) public {
@@ -41,6 +44,7 @@ contract EthPool is AccessControl {
     status[msg.sender].hasValue = true;
 
     totalValue += msg.value;
+    emit Deposit(msg.sender, msg.value);
   }
 
   function depositeRewards() public payable onlyTeam {
@@ -62,6 +66,7 @@ contract EthPool is AccessControl {
     (bool success, ) = msg.sender.call{value:deposit}("");
 
     require(success, "Transfer failed");
+    emit Withdraw(msg.sender, deposit);
   }
 
 }
