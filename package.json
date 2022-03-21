@@ -1,0 +1,31 @@
+{
+  "name": "alembics-program-test",
+  "version": "1.0.0",
+  "description": "��5\u0000 \u0000P\u0000r\u0000o\u0000g\u0000r\u0000a\u0000m\u0000 \u0000T\u0000e\u0000s\u0000t\u0000 \u0000-\u0000 \u0000S\u0000m\u0000a\u0000r\u0000t\u0000 \u0000c\u0000o\u0000n\u0000t\u0000r\u0000a\u0000c\u0000t\u0000 \u0000d\u0000e\u0000v\u0000e\u0000l\u0000o\u0000p\u0000m\u0000e\u0000n\u0000t\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkblockchaindev/alembics-program-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkblockchaindev/alembics-program-test/issues"
+  },
+  "homepage": "https://github.com/mkblockchaindev/alembics-program-test#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.6.1",
+    "hardhat": "^2.9.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.5.0"
+  }
+}
