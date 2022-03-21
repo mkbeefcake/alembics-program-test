@@ -2,18 +2,35 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
-
 struct DepositStatus {
   uint256 value;
   bool    hasValue;
 }
 
-contract EthPool {
+contract EthPool is AccessControl {
+  
+  bytes32 public constant TEAM_ROLE = keccak256("TEAM_MEMBERS");
 
   uint public totalValue;
-
   address[] public users;
   mapping(address => DepositStatus) public status;
+
+  constructor() {
+    _setupRole(TEAM_ROLE, msg.sender);
+  }
+
+  modifier onlyTeam() {
+    require(hasRole(TEAM_ROLE, msg.sender), "No team members");
+    _;
+  }
+
+  function addTeam(address account) public {
+    grantRole(TEAM_ROLE, account);
+  }
+
+  function removeTeam(address account) public {
+    revokeRole(TEAM_ROLE, account);
+  }
 
   fallback() external payable {    
 
@@ -26,7 +43,7 @@ contract EthPool {
     totalValue += msg.value;
   }
 
-  function depositeRewards() public payable {
+  function depositeRewards() public payable onlyTeam {
     require(totalValue > 0, "No rewards if the pool is empty");
 
     for (uint i=0; i<users.length; i++) {
